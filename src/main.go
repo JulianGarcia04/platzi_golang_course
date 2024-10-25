@@ -2,7 +2,42 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"slices"
+	"strings"
+
+	conditionalsStructure "github.com/JulianGarcia04/platzi_golang_course/src/conditionals_structures"
+	fmtPrinters "github.com/JulianGarcia04/platzi_golang_course/src/fmt_print_features"
+	variablesDeclaration "github.com/JulianGarcia04/platzi_golang_course/src/variables_declaration"
 )
+
+type User struct {
+	username string;
+	firstname string;
+	lastname string;
+	age int;
+	createAt string;
+}
+
+func isPalindrome (text string) bool {
+	// var textProxy string;
+
+	// for i := len(text) - 1; i >= 0; i-- {
+	// 	textProxy += string(text[i])
+	// }
+
+	// return textProxy == text
+
+	lowerCaseText := strings.ToLower(text)
+
+	splitText := strings.Split(lowerCaseText, "")
+
+	slices.Reverse(splitText)
+
+	reversedText := strings.Join(splitText, "")
+
+	return reversedText == lowerCaseText
+}
 
 // the size parameter must be in cm
 func getSquareArea (size uint) uint {
@@ -16,74 +51,6 @@ func getTriangleArea (base, height uint) uint {
 
 func getFullName (names ...string) []string {
 	return names
-}
-
-func variablesDeclaration () {
-	// Declaración de variables
-	const pi float64 = 3.14
-
-	const pi2 = 3.1415
-
-	fmt.Println("pi ", pi)
-	fmt.Println("pi2", pi2)
-
-	// Declaración de variables enteras
-	// Primera forma
-	base := 12
-	// Segunda forma
-	var altura int = 14
-	// Tercera forma
-	var area int
-
-	fmt.Println("base ", base)
-	fmt.Println("altura ", altura)
-	fmt.Println("area ", area)
-
-	// Zero values
-	var number int
-	var float float64
-	var string string
-	var boolean bool
-
-	fmt.Println("zero value of number variable ", number)
-	fmt.Println("zero value of float variable ", float)
-	fmt.Println("zero value of string variable ", string)
-	fmt.Println("zero value of boolean variable ", boolean)
-
-	// Example
-	const baseCuadrado = 10
-
-	areaCuadrado := baseCuadrado * baseCuadrado
-
-	fmt.Println("area del cuadrado ", areaCuadrado)
-}
-
-func printFeatures () {
-	// printLn
-	fmt.Println("with jump line");
-	fmt.Println("write another line");
-
-	// printf
-
-	language := "golang";
-	platform := "platzi";
-
-	fmt.Printf("Estoy empezando a aprender %q por %q.\n", language, platform);
-
-	var name string = "Julian"
-	var age uint8 = 20
-
-	fmt.Printf("Hola soy %s y tengo %d años.\n", name, age);
-
-	fmt.Printf("Esta variable es de tipo %T\n", age);
-
-	// Sprintf
-
-	var time uint16 = 60
-
-	var message string = fmt.Sprintf("Esta variable se almacenará en tiempo prolongado en minutos. Tiempo: %d\n", time);
-
-	fmt.Print(message)
 }
 
 func functions () {
@@ -130,42 +97,100 @@ func loops () {
 	// }
 }
 
-func ifConditional (testValue int) {
-	nro := testValue
-	if nro >= 0 {
-		fmt.Println("Este numero está entre cero y más allá")
-		return
-	}
+func arrays () {
+	numberArray := [4]int{10, 20, 30, 40}
 
-	if nro < 0 {
-		fmt.Println("Este número es negativo")
-		return
-	}
+	fmt.Printf("array:%v; length: %d; capacity: %d; \n", numberArray, len(numberArray), cap(numberArray))
 
-	fmt.Println("El número es nil o no se que es")
+	fmt.Println(numberArray[0])
+	fmt.Println(numberArray[:2])
+	fmt.Println(numberArray[1:2])
+
+	numberArray[0] = 15
+
+	fmt.Println(numberArray[0])
 }
 
-func switchConditional (nroTest int) {
+func slicesFunc () {
+	numberSlices := []int{10, 20, 30, 40, 50, 60}
 
-	switch nro := nroTest; nro  {
-	case 10:
-		fmt.Println("Es un número 10")
-	case 20:
-		fmt.Println("Es un número 20")
-	case -1:
-		fmt.Println("Es un número -1")
-	default:
-		fmt.Println("Puede ser un número")
+	fmt.Printf("slice: %v; length: %d; capacity: %d; \n", numberSlices, len(numberSlices), cap(numberSlices));
+
+	fmt.Println(numberSlices[0])
+	fmt.Println(numberSlices[:2])
+	fmt.Println(numberSlices[1:2])
+
+	// append slices
+
+	numberSlices = append(numberSlices, 70, 80)
+
+	fmt.Printf("slice: %v; length: %d; capacity: %d; \n", numberSlices, len(numberSlices), cap(numberSlices));
+
+	numberSlices = append(numberSlices, []int{90, 100, 110, 120}...)
+
+	fmt.Printf("slice: %v; length: %d; capacity: %d; \n", numberSlices, len(numberSlices), cap(numberSlices));
+}
+
+func rangeMethod () {
+	names := []string{"julian", "rosario", "maria", "emma", "juan", "orlando", "fernando"}
+
+	fmt.Println("--------only values----------")
+	for _, valor := range names {
+		fmt.Println(valor)
+	}
+	fmt.Println("-------only index--------")
+	for i := range names {
+		fmt.Println(i)
+	}
+	fmt.Println("--------index and values----------")
+	for i, name := range names {
+		fmt.Println(i, name)
+	}
+}
+
+func mapsFunc () {
+	m := map[string]int{
+		"Jose": 15,
+		"Julian": 20,
+		"Hernando": 30,
 	}
 
-	switch nro := nroTest; {
-	case nro >= 0:
-		fmt.Println("Este numero está entre cero y más allá")
-	case nro < 0: 
-		fmt.Println("Este número es negativo")
-	default:
-		fmt.Println("Es un número ???")
+	fmt.Println(m)
+
+	// recorrer
+	fmt.Println("go over map ")
+	for k, v := range m {
+		fmt.Println("key: ", k)
+		fmt.Println("value: ", v)
 	}
+
+	// seleccionar valor
+	fmt.Println("Select a value")
+	name := "Jose"
+
+	age := m[name]
+
+	fmt.Printf("%s tiene %d años\n", name, age)
+}
+
+func implementStructs () {
+	var addUser = User{username: "julian04", firstname: "julian", lastname: "garcia", age: 20, createAt: "13/02/2004"};
+
+	log.Println(addUser)
+
+	users := []User{ {username: "Fer", firstname: "Fernanda", lastname: "Sandoval", age: 22, createAt: "20/12/2003"} };
+
+	users = append(users, addUser)
+
+	log.Println(users)
+
+	checkIfExistUser := func (E User) bool {
+		return E.username == "julian04"
+	}
+
+	log.Println(slices.ContainsFunc(users, checkIfExistUser))
+
+	log.Println(users[0])
 }
 
 func main () {
@@ -173,10 +198,10 @@ func main () {
 	fmt.Println("Hello world!!")
 
 	fmt.Println("-------------variables declaration-------------------")
-	variablesDeclaration()
+	variablesDeclaration.VariablesDeclaration()
 
 	fmt.Println("-------------print features-----------------------")
-	printFeatures()
+	fmtPrinters.PrintFeatures()
 
 	fmt.Println("-------------functions-----------------")
 	functions()
@@ -185,16 +210,35 @@ func main () {
 	loops()
 
 	fmt.Println("-------------if conditional---------------")
-	ifConditional(0)
-	ifConditional(-2)
+	conditionalsStructure.IfConditional(0)
+	conditionalsStructure.IfConditional(-2)
 
-	fmt.Println("-------------switch conditional-------------")
-	switchConditional(10)
-	switchConditional(20)
-	switchConditional(-1)
+	fmt.Println("----------------switch conditional-------------")
+	conditionalsStructure.SwitchConditional(10)
+	conditionalsStructure.SwitchConditional(20)
+	conditionalsStructure.SwitchConditional(-1)
 
+	fmt.Println("------------------arrays--------------------")
+	arrays()
+
+	fmt.Println("------------------slices-----------------------")
+	slicesFunc()
+
+	fmt.Println("------------------range method-----------------------")
+	rangeMethod()
+
+	fmt.Println("------------------is palindrome function-----------------------")
+	fmt.Printf("'rice' is palidrome? %v \n", isPalindrome("rice"))
+	fmt.Printf("'aibofobia' is palidrome? %v \n", isPalindrome("aibofobia"))
+	fmt.Printf("'Aibofobia' is palidrome? %v \n", isPalindrome("Aibofobia"))
+
+	fmt.Println("-----------------maps-------------------")
+	mapsFunc()
+
+	fmt.Println("-----------------strucs------------------")
+	implementStructs()
 	// my first server in go :)
-	// this it has the course but I wanted create a server
+	// this it doesn't has the course but I wanted create a server
 
 	// helloHandler := func(w http.ResponseWriter, req *http.Request) {
 	// 	io.WriteString(w, "Hello, world!\n")
