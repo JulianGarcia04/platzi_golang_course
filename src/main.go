@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"log"
 	"slices"
-	"strings"
 
 	conditionalsStructure "github.com/JulianGarcia04/platzi_golang_course/src/conditionals_structures"
 	fmtPrinters "github.com/JulianGarcia04/platzi_golang_course/src/fmt_print_features"
+	"github.com/JulianGarcia04/platzi_golang_course/src/functions"
 	variablesDeclaration "github.com/JulianGarcia04/platzi_golang_course/src/variables_declaration"
 )
 
@@ -17,53 +17,6 @@ type User struct {
 	lastname string;
 	age int;
 	createAt string;
-}
-
-func isPalindrome (text string) bool {
-	// var textProxy string;
-
-	// for i := len(text) - 1; i >= 0; i-- {
-	// 	textProxy += string(text[i])
-	// }
-
-	// return textProxy == text
-
-	lowerCaseText := strings.ToLower(text)
-
-	splitText := strings.Split(lowerCaseText, "")
-
-	slices.Reverse(splitText)
-
-	reversedText := strings.Join(splitText, "")
-
-	return reversedText == lowerCaseText
-}
-
-// the size parameter must be in cm
-func getSquareArea (size uint) uint {
-	return size * size
-}
-
-// base and height parameter must be in cm
-func getTriangleArea (base, height uint) uint {
-	return (base * height)/2
-}
-
-func getFullName (names ...string) []string {
-	return names
-}
-
-func functions () {
-	squareArea := getSquareArea(10);
-	fmt.Printf("El area del cuadrado es %d centimetros.\n", squareArea);
-
-	triangleArea := getTriangleArea(20, 30);
-	fmt.Printf("El area del triangulo es %d centimetros.\n", triangleArea);
-
-	names := getFullName("Julian", "Garcia")
-
-	fmt.Println(names)
-
 }
 
 func loops () {
@@ -204,7 +157,7 @@ func main () {
 	fmtPrinters.PrintFeatures()
 
 	fmt.Println("-------------functions-----------------")
-	functions()
+	functions.Functions()
 
 	fmt.Println("-------------loops---------------")
 	loops()
@@ -228,9 +181,9 @@ func main () {
 	rangeMethod()
 
 	fmt.Println("------------------is palindrome function-----------------------")
-	fmt.Printf("'rice' is palidrome? %v \n", isPalindrome("rice"))
-	fmt.Printf("'aibofobia' is palidrome? %v \n", isPalindrome("aibofobia"))
-	fmt.Printf("'Aibofobia' is palidrome? %v \n", isPalindrome("Aibofobia"))
+	fmt.Printf("'rice' is palidrome? %v \n", functions.IsPalindrome("rice"))
+	fmt.Printf("'aibofobia' is palidrome? %v \n", functions.IsPalindrome("aibofobia"))
+	fmt.Printf("'Aibofobia' is palidrome? %v \n", functions.IsPalindrome("Aibofobia"))
 
 	fmt.Println("-----------------maps-------------------")
 	mapsFunc()
