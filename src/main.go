@@ -5,6 +5,7 @@ import (
 	"log"
 	"slices"
 
+	"github.com/JulianGarcia04/platzi_golang_course/src/concurrency"
 	conditionalsStructure "github.com/JulianGarcia04/platzi_golang_course/src/conditionals_structures"
 	fmtPrinters "github.com/JulianGarcia04/platzi_golang_course/src/fmt_print_features"
 	"github.com/JulianGarcia04/platzi_golang_course/src/functions"
@@ -190,6 +191,11 @@ func main () {
 
 	fmt.Println("-----------------strucs------------------")
 	implementStructs()
+
+	fmt.Println("-----------------concurrency------------------")
+	concurrency.Concurrency()
+
+
 	// my first server in go :)
 	// this it doesn't has the course but I wanted create a server
 
